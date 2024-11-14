@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">-->
+    <title>Pagina de Administracion</title>
+</head>
+<body>
+    <h1>Pagina de Administracion</h1>
+    <h2>Lista de Participantes</h2>
+    <table>
+            <thead>
+                    <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Email</th>
+                            <th>Telefono</th>
+                            <th>Direccion</th>
+                            <th>Acciones</th>
+                    </tr>
+            </thead>
+            <tbody>
+                    <tr th:each="persona: ${personas}">
+                            <td th:text="${persona.id}"></td>
+                             <td th:text="${persona.nombre}"></td>
+                             <td th:text="${persona.apellido}"></td>
+                             <td th:text="${persona.email}"></td>
+                             <td th:text="${persona.telefono}"></td>
+                             <td th:text="${persona.direccion}"></td>
+                             <td>
+                                <a th:href="@{/personas/editar/{id} {id=${persona.id} } }">
+                                <a th:href="@{/personas/eliminar/{id} {id=${persona.id} } }">
+                             </td>
+                    </tr>
+            </tbody>
+    </table>
+    <a href="/personas/nuevo">Nueva Persona</a>
+</body>
+</html>
