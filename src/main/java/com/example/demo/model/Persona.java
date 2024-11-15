@@ -1,25 +1,31 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
-/**
- *
- * @author usermacbook
- */
 @Entity
+@Table(name = "personas")
 public class Persona {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @Column(nullable = false)
     private String nombre;
+    
+    @Column(nullable = false)
     private String apellido;
+    
+    @Column(unique = true, nullable = false)
     private String email;
+    
     private String telefono;
+    
     private String direccion;
-
+    
+    @Column(nullable = false)
+    private String password;
+    
+    // Getters y Setters
     public Long getId() {
         return id;
     }
@@ -67,6 +73,12 @@ public class Persona {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-    
-    
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
