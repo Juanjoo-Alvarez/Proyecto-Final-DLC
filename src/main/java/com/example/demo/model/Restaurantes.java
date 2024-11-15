@@ -1,10 +1,13 @@
 package com.example.demo.model;
 
+
+//se importan las librerias necesarias
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+//se crea la clase Restaurantes
 @Entity
 public class Restaurantes {
     @Id
@@ -14,6 +17,8 @@ public class Restaurantes {
     private String imagen;
     private Double promedio;
 
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // Getters y Setters
     public Long getId() {
         return id;
     }
