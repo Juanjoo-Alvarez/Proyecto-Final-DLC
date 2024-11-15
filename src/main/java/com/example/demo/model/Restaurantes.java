@@ -1,13 +1,12 @@
 package com.example.demo.model;
 
-
-//se importan las librerias necesarias
+// Importa las librerías necesarias
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-//se crea la clase Restaurantes
+// Se crea la clase Restaurantes
 @Entity
 public class Restaurantes {
     @Id
@@ -16,6 +15,7 @@ public class Restaurantes {
     private String nombre;
     private String imagen;
     private Double promedio;
+    private Integer numeroResenas; // Nueva columna
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // Getters y Setters
@@ -49,5 +49,13 @@ public class Restaurantes {
 
     public void setPromedio(Double promedio) {
         this.promedio = promedio;
+    }
+
+    public Integer getNumeroResenas() {
+        return numeroResenas;
+    }
+
+    public void setNumeroResenas(Integer numeroResenas) {
+        this.numeroResenas = numeroResenas;
     }
 }

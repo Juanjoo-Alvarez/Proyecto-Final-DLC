@@ -85,7 +85,7 @@ textarea {
 
 /* Estilos del sistema de calificación por estrellas */
 .rating {
-    direction: rtl; /* Estrellas ordenadas de derecha a izquierda */
+    direction: ltr; /* Estrellas ordenadas de derecha a izquierda */
     font-size: 2em; /* Tamaño de las estrellas */
     display: inline-flex;
 }
@@ -97,7 +97,7 @@ textarea {
     transition: color 0.2s;
 }
 
-.star.checked {
+.star.selected {
     color: gold; /* Color de las estrellas seleccionadas */
 }
 

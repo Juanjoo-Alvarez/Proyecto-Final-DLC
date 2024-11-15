@@ -28,10 +28,10 @@
         <div th:each="restaurante : ${restaurantes}" class="restaurant-card" th:data-restaurant="${restaurante.nombre}">
             <img th:src="@{${restaurante.imagen}}" th:alt="${restaurante.nombre}">
             <p th:text="${restaurante.nombre}">Restaurant Name</p>
-            <p>Rating: <span th:text="${restaurante.promedio}">0.0</span></p>
-            <a href="resenas.html" class="review-btn">
+            <p>Rating: <span th:text="${restaurante.promedio}"></span></p>
+            <a th:href="@{/resenas(restaurantName=${restaurante.nombre})}" class="review-btn">
                 <button>Reseñar</button>
-            </a>
+            </a>            
         </div>
     </main>
 </body>
