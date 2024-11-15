@@ -1,19 +1,19 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.Persona;
-import com.example.demo.service.PersonaService;
+
+//se importan las librerias necesarias
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import org.springframework.web.bind.annotation.*;
+import com.example.demo.model.Persona;
+import com.example.demo.service.PersonaService;
 
-
+//se crea la clase PersonaController
 @Controller
 @RequestMapping("/personas")
 public class PersonaController {
