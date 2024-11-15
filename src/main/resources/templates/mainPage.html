@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurants</title>
+    <link rel="stylesheet" th:href="@{/restaurantes.css}">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <h1>UniFoodRank</h1>
+        <div class="menu">
+            <a href="#">Perfil</a>
+            <a href="#">FAQ</a>
+            <a href="./index.html">Cerrar sesión</a>
+        </div>
+        <div class="logo">
+            <img src="../images/logoo.png" alt="App Logo">
+        </div>
+    </nav>
+
+    <!-- Grid de restaurantes -->
+    <main class="restaurant-grid">
+        <!-- Iterar sobre los restaurantes obtenidos desde la BD -->
+        <div th:each="restaurante : ${restaurantes}" class="restaurant-card" th:data-restaurant="${restaurante.nombre}">
+            <img th:src="@{${restaurante.imagen}}" th:alt="${restaurante.nombre}">
+            <p th:text="${restaurante.nombre}">Restaurant Name</p>
+            <p>Rating: <span th:text="${restaurante.promedio}">0.0</span></p>
+            <a href="resenas.html" class="review-btn">
+                <button>Reseñar</button>
+            </a>
+        </div>
+    </main>
+</body>
+
+</html>

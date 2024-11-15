@@ -1,4 +1,3 @@
-
 package com.example.demo.controller;
 
 import com.example.demo.model.Persona;
@@ -11,11 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 @Controller
 @RequestMapping("/personas")
 public class PersonaController {
@@ -23,7 +17,7 @@ public class PersonaController {
     @Autowired
     private PersonaService personaService;
 
-    @GetMapping
+    @GetMapping("/personas")
     public String listarPersonas(Model model) {
         model.addAttribute("personas", personaService.listarTodas());
         return "persona-list";
@@ -34,25 +28,30 @@ public class PersonaController {
         return "index";
     }
 
-    @GetMapping("/nuevo")
+    @GetMapping("/personas/nuevo")
     public String mostrarFormularioNuevaPersona(Model model) {
         model.addAttribute("persona", new Persona());
         return "persona-form";
     }
+    
+     @GetMapping("/HomePage")
+    public String mostrarHomePage(){
+        return "mainPage";
+    }
 
-    @PostMapping
+    @PostMapping("/personas")
     public String guardarPersona(Persona persona) {
         personaService.guardar(persona);
         return "redirect:/personas";
     }
 
-    @GetMapping("/editar/{id}")
+    @GetMapping("/personas/editar/{id}")
     public String mostrarFormularioEditarPersona(@PathVariable Long id, Model model) {
         model.addAttribute("persona", personaService.obtenerPorId(id));
         return "persona-form";
     }
 
-    @GetMapping("/eliminar/{id}")
+    @GetMapping("/personas/eliminar/{id}")
     public String eliminarPersona(@PathVariable Long id) {
         personaService.eliminar(id);
         return "redirect:/personas";
