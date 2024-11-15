@@ -1,69 +1,66 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const stars = document.querySelectorAll(".star");
-    const ratingInput = document.getElementById("rating");
-    const form = document.getElementById("review-form");
+document.addEventListener('DOMContentLoaded', function() {
+    // Función para manejar la selección de estrellas
+    function setupStarRating(starContainerId, ratingInputId) {
+        const stars = document.querySelectorAll(`#${starContainerId} .star`);
+        const ratingInput = document.getElementById(ratingInputId);
 
-    document.addEventListener("DOMContentLoaded", function () {
-        const stars = document.querySelectorAll(".star");
-        const ratingInput = document.getElementById("rating");
-    
-        // Agregar evento de clic a cada estrella
-        stars.forEach(star => {
-            star.addEventListener("click", () => {
-                const ratingValue = parseInt(star.getAttribute("data-value"));
-    
-                // Actualizar la calificación en el campo oculto
+        stars.forEach((star) => {
+            star.addEventListener('click', function() {
+                const ratingValue = star.getAttribute('data-value');
                 ratingInput.value = ratingValue;
-    
-                // Actualizar la visualización de las estrellas
-                stars.forEach(s => {
-                    if (parseInt(s.getAttribute("data-value")) <= ratingValue) {
-                        s.classList.add("checked");
+
+                // Marcar solo hasta la estrella seleccionada
+                stars.forEach((s, i) => {
+                    if (i < ratingValue) {
+                        s.classList.add('checked');
                     } else {
-                        s.classList.remove("checked");
+                        s.classList.remove('checked');
                     }
                 });
             });
         });
-    });
-    
+    }
 
-    // Manejo del envío del formulario
-    form.addEventListener("submit", async (e) => {
-        e.preventDefault(); // Prevenir recarga de la página
+    // Inicializar las estrellas para comida y precios
+    setupStarRating('food-rating', 'foodRating');
+    setupStarRating('price-rating', 'priceRating');
+    setupStarRating('service-rating', 'serviceRating');
 
-        const restaurantName = document.getElementById("restaurant-name").value;
-        const rating = ratingInput.value;
-        const reviewText = document.getElementById("review-text").value;
+    document.getElementById('review-form').addEventListener('submit', function(event) {
+        event.preventDefault();
 
-        if (!rating || !reviewText) {
-            alert("Por favor, completa todos los campos antes de enviar.");
+        // Obtener valores
+        const restaurantName = document.getElementById('restaurant-name').value;
+        const reviewText = document.getElementById('review-text').value;
+        const foodRatingValue = document.getElementById('foodRating').value;
+        const priceRatingValue = document.getElementById('priceRating').value;
+        const serviceRatingValue = document.getElementById('serviceRating').value;
+
+        // Validación
+        if (!foodRatingValue || !priceRatingValue || !reviewText || !serviceRatingValue) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Campos incompletos',
+                text: 'Por favor, complete todos los campos antes de enviar.',
+            });
             return;
         }
 
-        // Enviar datos al servidor
-        try {
-            const response = await fetch("/submit-review", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    restaurantName,
-                    rating,
-                    reviewText
-                })
-            });
+        // Simulación de guardado
+        console.log('Restaurante:', restaurantName);
+        console.log('Calificación de la Comida:', foodRatingValue);
+        console.log('Calificación de los Precios:', priceRatingValue);
+        console.log('Clasificacion del Servicio:', serviceRatingValue);
+        console.log('Reseña:', reviewText);
 
-            if (response.ok) {
-                alert("Reseña enviada exitosamente.");
-                window.location.href = "/mainPage"; // Redirigir a otra página si es necesario
-            } else {
-                alert("Error al enviar la reseña.");
-            }
-        } catch (error) {
-            console.error("Error:", error);
-            alert("Error al conectar con el servidor.");
-        }
+        Swal.fire({
+            icon: 'success',
+            title: '¡Gracias por tu reseña!',
+            text: 'Tu reseña ha sido enviada exitosamente.',
+            confirmButtonColor: '#21be16'
+        }).then(() => {
+            window.location.href = "";
+
+        });
     });
 });

@@ -1,18 +1,20 @@
 package com.example.demo.controller;
 
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import com.example.demo.model.Restaurantes;
+import com.example.demo.service.RestaurantesService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-/**
- *
- * @author usermacbook
- */
+@RestController
+@RequestMapping("/restaurantes")
 public class RestaurantController {
-    
-    @GetMapping("/resenas")
-    public String mostrarResena(@RequestParam String restaurantName, Model model) {
-        model.addAttribute("restaurantName", restaurantName); // Agregar el nombre al modelo
-        return "resenas"; // Nombre de tu archivo HTML de reseñas
-}
+
+    @Autowired
+    private RestaurantesService restaurantesService;
+
+    @PostMapping("/{id}/agregarResena")
+    public Restaurantes agregarResena(@PathVariable Long id, @RequestParam Double calificacion) {
+        // Llama al servicio para actualizar la calificación
+        return restaurantesService.agregarResena(id, calificacion);
+    }
 }
